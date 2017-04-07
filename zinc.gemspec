@@ -6,7 +6,7 @@ spec = Gem::Specification.new do |s|
 	s.authors = ['Julian Simioni']
 	s.email = ['julian.simioni@gmail.com']
 
-	s.add_dependency('rest-client', '~> 1.4')
+	s.add_dependency('rest-client', '~> 2.0.1')
 
 	s.add_development_dependency('rspec')
 	s.add_development_dependency('rake')
