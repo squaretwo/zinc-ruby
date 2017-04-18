@@ -2,7 +2,8 @@ require 'json'
 require 'rest_client'
 
 require 'zinc/order'
-
+require 'zinc/product_details'
+require 'zinc/product_prices'
 require 'zinc/errors/authentication_error'
 
 module Zinc
