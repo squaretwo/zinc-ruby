@@ -32,9 +32,15 @@ module Zinc
     opts = {
         :method => method,
         :user => api_key,
-        :url => url,
-        :payload => params.to_json,
+        :url => url
     }
+
+    if method == :get
+      opts.merge!({headers: {params: params}})
+    else
+      opts.merge!(:payload => params.to_json)
+    end
+
     response = execute_request(opts)
     return JSON.parse(response)
   end
