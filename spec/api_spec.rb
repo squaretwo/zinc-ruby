@@ -50,5 +50,18 @@ describe Zinc do
         @order.merchant.should == test_order_response[:merchant]
       end
     end
+
+    it "should call zinc to cancel the order" do
+      id = test_order_response[:id]
+      create_expects = {:user => Zinc.api_key, :method => :post, :url => Zinc::Order.url, :payload => test_order_create.to_json}
+      @mock.should_receive(:post).once.with(create_expects).and_return(test_response(test_order_response))
+
+      data = {id: id}
+      cancel_expects = {:user => Zinc.api_key, :method => :post, :url => Zinc::Order.url+'/'+id+'/cancel', :payload => data.to_json}
+      @mock.should_receive(:post).once.with(cancel_expects).and_return(test_response({request_id: id}))
+
+      order = Zinc::Order.create(test_order_create)
+      o = Zinc::Order.cancel(id)
+    end
   end
 end

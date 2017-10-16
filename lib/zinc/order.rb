@@ -18,6 +18,15 @@ module Zinc
       o
     end
 
+    def self.cancel(id)
+      o = Order.new
+      response = Zinc.request(:post, url+'/'+id+'/cancel', {id: id})
+      if response
+        o.set_values(response)
+      end
+      o
+    end
+
     def self.url
       Zinc.url_base+'orders'
     end
