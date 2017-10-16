@@ -13,7 +13,7 @@ describe Zinc::ProductPrices do
       data = {
           retailer: 'amazon'
       }
-      expects = {:user => Zinc.api_key, :method => :get, :url => Zinc::ProductPrices.url('B002Q633CI'), :payload => data.to_json }
+      expects = {:user => Zinc.api_key, :method => :get, :url => Zinc::ProductPrices.url('B002Q633CI'), :headers => {params: data} }
       @mock.should_receive(:get).once.with(expects).and_return(test_response(test_product_prices_response))
       Zinc::ProductPrices.get('B002Q633CI', {retailer: 'amazon'}).should be_a(Zinc::ProductPrices)
     end
