@@ -17,5 +17,17 @@ module Zinc
         Zinc::Order.url.should == 'https://api.zinc.io/v1/orders'
       end
     end
+
+    describe "cancelling an order" do
+      it "returns a CancelledOrder" do
+        Zinc::Order.cancel("foo").should be_a(Zinc::CancelledOrder)
+      end
+    end
+
+    describe "returning an order" do
+      it "returns a ReturnedOrder" do
+        Zinc::Order.return("foo").should be_a(Zinc::ReturnedOrder)
+      end
+    end
   end
 end

@@ -61,7 +61,7 @@ describe Zinc do
       @mock.should_receive(:post).once.with(cancel_expects).and_return(test_response({request_id: id}))
 
       order = Zinc::Order.create(test_order_create)
-      o = Zinc::Order.cancel(id)
+      o = Zinc::Order.cancel(id, data)
     end
   end
 end
