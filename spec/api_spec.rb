@@ -63,5 +63,18 @@ describe Zinc do
       order = Zinc::Order.create(test_order_create)
       o = Zinc::Order.cancel(id, data)
     end
+
+    it "should call zinc to return the order" do
+      id = test_order_response[:id]
+      create_expects = {:user => Zinc.api_key, :method => :post, :url => Zinc::Order.url, :payload => test_order_create.to_json}
+      @mock.should_receive(:post).once.with(create_expects).and_return(test_response(test_order_response))
+
+      data = {id: id}
+      return_expects = {:user => Zinc.api_key, :method => :post, :url => Zinc::Order.url+'/'+id+'/return', :payload => data.to_json}
+      @mock.should_receive(:post).once.with(return_expects).and_return(test_response({request_id: id}))
+
+      order = Zinc::Order.create(test_order_create)
+      o = Zinc::Order.return(id, data)
+    end
   end
 end
