@@ -4,7 +4,7 @@ module Zinc
   class CancelledOrder < BaseOrder
     def self.get(id)
       o = CancelledOrder.new
-      response = Zinc.request(:get, url+'/'+id, {})
+      response = Zinc.request(:get, url + '/' + id, {})
       if response
         o.set_values(response)
       end
@@ -12,7 +12,7 @@ module Zinc
     end
 
     def self.url
-      Zinc.url_base+'cancellations'
+      Zinc.url_base + 'cancellations'
     end
 
     private

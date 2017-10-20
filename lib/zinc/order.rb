@@ -14,7 +14,7 @@ module Zinc
 
     def self.get(id)
       o = Order.new
-      response = Zinc.request(:get, url+'/'+id, {})
+      response = Zinc.request(:get, url+'/' + id, {})
       if response
         o.set_values(response)
       end
@@ -23,7 +23,7 @@ module Zinc
 
     def self.cancel(id, params = {})
       o = CancelledOrder.new
-      response = Zinc.request(:post, url+'/'+id+'/cancel', params)
+      response = Zinc.request(:post, url+'/' + id + '/cancel', params)
       if response
         o.set_values(response)
       end
@@ -32,7 +32,7 @@ module Zinc
 
     def self.return(id, params = {})
       o = ReturnedOrder.new
-      response = Zinc.request(:post, url+'/'+id+'/return', params)
+      response = Zinc.request(:post, url + '/' + id + '/return', params)
       if response
         o.set_values(response)
       end
@@ -40,7 +40,7 @@ module Zinc
     end
 
     def self.url
-      Zinc.url_base+'orders'
+      Zinc.url_base + 'orders'
     end
 
     private
