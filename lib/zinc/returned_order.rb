@@ -5,7 +5,7 @@ module Zinc
 
     def self.get(id, params={})
       o = ReturnedOrder.new
-      response = Zinc.request(:post, url+'/'+id+'/return', params)
+      response = Zinc.request(:get, url+'/'+id, params)
       if response
         o.set_values(response)
       end
