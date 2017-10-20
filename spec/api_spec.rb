@@ -49,6 +49,24 @@ describe Zinc do
         @order.id.should == id
         @order.merchant.should == test_order_response[:merchant]
       end
+
+      it "returns a cancelled order when get called with id" do
+        id = test_cancelled_order_response[:id]
+        expects = {:url => Zinc::CancelledOrder.url+'/'+id, :user => Zinc.api_key, :method => :get, :headers => {params: {}}}
+        @mock.should_receive(:get).once.with(expects).and_return(test_response(test_cancelled_order_response))
+        @cancelled_order = Zinc::CancelledOrder.get(id)
+        @cancelled_order.id.should == id
+        @cancelled_order.should be_a(Zinc::CancelledOrder)
+      end
+
+      it "returns a returned order when get called with id" do
+        id = test_returned_order_response[:id]
+        expects = {:url => Zinc::ReturnedOrder.url+'/'+id, :user => Zinc.api_key, :method => :get, :headers => {params: {}}}
+        @mock.should_receive(:get).once.with(expects).and_return(test_response(test_returned_order_response))
+        @returned_order = Zinc::ReturnedOrder.get(id)
+        @returned_order.id.should == id
+        @returned_order.should be_a(Zinc::ReturnedOrder)
+      end
     end
 
     it "should call zinc to cancel the order" do

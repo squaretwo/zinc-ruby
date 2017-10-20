@@ -105,6 +105,18 @@ def test_order_response
   }
 end
 
+def test_cancelled_order_response
+  {
+      :id => "abc3rfplly"
+  }
+end
+
+def test_returned_order_response
+  {
+      :id => "abc3rfplly"
+  }
+end
+
 def test_product_prices_response
   {
       :status => "completed",
